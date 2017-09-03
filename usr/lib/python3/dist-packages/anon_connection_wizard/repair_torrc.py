@@ -36,7 +36,7 @@ def repair_torrc():
 \n\
 # Enable Tor through anon-connection-wizard or manually uncomment \"DisableNetwork 0\" by\n\
 # removing the # in front of it.\n")
-            f.write("%include /etc/torrc.d\n")
+            f.write("#%include /etc/torrc.d\n")
             f.write("#DisableNetwork 0\n")
         return 'fixed_missing_torrc'
     else:
@@ -50,7 +50,7 @@ def repair_torrc():
             str = line.strip()
             if (str == '#DisableNetwork 0') or (str == 'DisableNetwork 0'):
                 disable_line_exists = True
-            elif (str == '%include /etc/torrc.d'):
+            elif (str == '#%include /etc/torrc.d'):
                 torrcd_line_exists = True
 
         # it is important to prefix a \n in case torrc does not contain \n at file end
@@ -60,7 +60,7 @@ def repair_torrc():
         
         if not torrcd_line_exists:
             with open('/etc/tor/torrc', "a") as f:
-                f.write("%include /etc/torrc.d\n")
+                f.write("#%include /etc/torrc.d\n")
 
         if not disable_line_exists:
             with open('/etc/tor/torrc', "a") as f:
