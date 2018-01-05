@@ -3,7 +3,7 @@
 import sys, fileinput
 import os, time
 from subprocess import call
-from anon_connection_wizard import repair_torrc
+from anonconnectionwizard import repair_torrc
 
 def tor_status():
     if not os.path.exists('/etc/tor/torrc'):
@@ -77,8 +77,8 @@ def set_enabled():
     return 'missing_disablenetwork_line'
 
 def set_disabled():
-    repair_torrc.repair_torrc()  # This gurantees a good torrc    
-    
+    repair_torrc.repair_torrc()  # This gurantees a good torrc
+
     fh = open('/etc/tor/torrc','r')
     lines = fh.readlines()
     fh.close()
