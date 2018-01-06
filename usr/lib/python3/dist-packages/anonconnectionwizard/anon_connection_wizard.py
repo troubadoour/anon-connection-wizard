@@ -29,6 +29,7 @@ from guimessages.guimessage import gui_message
 
 from anonconnectionwizard import tor_status
 from anonconnectionwizard import repair_torrc
+from anonconnectionwizard import tor_bootstrap
 
 class Common:
     '''
@@ -1266,7 +1267,7 @@ class AnonConnectionWizard(QtWidgets.QWizard):
                     after they clicked the NextButton.
                     '''
 
-                    self.bootstrap_thread = TorBootstrap(self)
+                    self.bootstrap_thread = tor_bootstrap.TorBootstrap(self)
                     self.bootstrap_thread.signal.connect(self.update_bootstrap)
                     self.bootstrap_thread.finished.connect(self.show_finish_button)
                     self.bootstrap_thread.start()
